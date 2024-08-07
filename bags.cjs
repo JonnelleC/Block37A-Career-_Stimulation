@@ -1,4 +1,5 @@
 const client = require('./client.cjs');
+const seed = require('./seed.cjs');
 
 const createBag = async () => {
     try{
@@ -15,6 +16,18 @@ const createBag = async () => {
     }
 }
 
+const getAllBags = async () => {
+    try{
+        const { rows } = await client.query(`
+            SELECT * From BAGS;
+            `);
+            return rows;
+    } catch (err){
+        console.log(err);
+    }
+}
+
 module.exports = {
-    createBag
+    createBag,
+    getAllBags
 }

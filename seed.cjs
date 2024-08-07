@@ -2,6 +2,7 @@ const client = require('./client.cjs');
 const { createBag } = require ('./bags.cjs');
 
 
+
 const createTables = async () => {
 
     try{
@@ -63,3 +64,4 @@ const syncAndSeed = async () => {
         console.log('New Bag On the Block!')
     }
 }
+syncAndSeed ();
