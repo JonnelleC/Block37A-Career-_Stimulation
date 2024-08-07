@@ -1,7 +1,7 @@
 const express = require('express');
 const { getAllBags } = require('./bags.cjs'); 
 const { sellerTable } = require('./seed.cjs'); 
-const { getAllReviews } = require('./getReviews');
+const { getAllReviews } = require('./reviews.cjs');
 const client = require('./client.cjs');
 
 const app = express();
