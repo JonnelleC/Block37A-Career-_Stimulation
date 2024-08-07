@@ -1,6 +1,6 @@
 const express = require('express');
 const { getAllBags } = require('./bags.cjs'); 
-const sellerTable = require('./seed.cjs'); 
+const { sellerTable } = require('./seed.cjs'); 
 const { getAllReviews } = require('./getReviews');
 const client = require('./client.cjs');
 
@@ -42,6 +42,7 @@ app.post('/api/v1/seller', async (req, res, next) => {
         res.status(500).json({ error: 'Failed to create seller' });
     }
 });
+
 app.get('/api/v1/reviews', async (req, res, next) => {
     try {
         const reviews = await getAllReviews();
@@ -51,6 +52,8 @@ app.get('/api/v1/reviews', async (req, res, next) => {
         res.status(500).json({ error: 'Failed to fetch reviews' });
     }
 });
+
+
 
 
 

@@ -22,7 +22,7 @@ const createReviewTable = async () => {
 
 createReviewTable();
 
-const client = require('./client.cjs'); // Ensure client.cjs is correctly set up
+const client = require('./client.cjs');
 
 const getAllReviews = async () => {
     try {
@@ -37,4 +37,6 @@ const getAllReviews = async () => {
     }
 };
 
-module.exports = { getAllReviews };
+module.exports = { getAllReviews, 
+    createReviewTable
+};

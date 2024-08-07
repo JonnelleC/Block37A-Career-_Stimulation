@@ -1,8 +1,8 @@
 const client = require('./client.cjs');
 const { createBag } = require ('./bags.cjs');
-
-
-
+const { getAllBags} = require ('./bags.cjs');
+const { createReviewTable } = require ('./reviews.cjs');
+const { getAllReviews } = require ('./reviews.cjs')
 const createTables = async () => {
 
     try{
@@ -22,16 +22,18 @@ const createTables = async () => {
 
 
 }
+
 const sellerTable = async () => {
     try {
         await client.connect();
         await client.query(`
             CREATE TABLE IF NOT EXISTS sellers (
-                Username VARCHAR(50) PRIMARY KEY,
-                EmailAddress VARCHAR(100) NOT NULL,
-                FirstName VARCHAR(50) NOT NULL,
-                LastName VARCHAR(50) NOT NULL,
-                AccountNumber INT UNIQUE
+                username VARCHAR(50) PRIMARY KEY,
+                emailaddress VARCHAR(100) NOT NULL,
+                firstname VARCHAR(50) NOT NULL,
+                lastname VARCHAR(50) NOT NULL,
+                accountnumber INT UNIQUE,
+                password VARCHAR(20) NOT Null
             );
         `);
         console.log('Sellers table created successfully.');
@@ -42,7 +44,7 @@ const sellerTable = async () => {
     }
 };
 
-sellerTable();
+
 
 
 const syncAndSeed = async () => {
@@ -52,14 +54,33 @@ const syncAndSeed = async () => {
 
         await createTables();
         await createSellerTable();
-        await seedData();
+       
+        await createBag();
+        await getAllBags();
+
+     
 
         await client.end();
         console.log('DISCONNECTED');
+
+        
     } catch (err) {
         console.error('Error during sync and seed:', err);
         await client.end();
     }
 };
 
-syncAndSeed();
+const seedData = async () => {
+ 
+        await sellerTable();
+        await createBag();
+        await getAllBags();
+        await createReviewTable();
+        await createTables();
+        await syncAndSeed();
+        await client.end();
+  
+}
+
+seedData();
+
