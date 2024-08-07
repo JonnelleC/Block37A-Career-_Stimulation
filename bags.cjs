@@ -1,5 +1,5 @@
 const client = require('./client.cjs');
-const seed = require('./seed.cjs');
+
 
 const createBag = async () => {
     try{
