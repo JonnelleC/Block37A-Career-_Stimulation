@@ -1,7 +1,9 @@
 const express = require('express');
-const { getAllBags } = require('./bags.cjs'); // Assuming getAllBags is a named export
-const sellerTable = require('./seed.cjs'); // Assuming seed.cjs exports functions or relevant data
+const { getAllBags } = require('./bags.cjs'); 
+const sellerTable = require('./seed.cjs'); 
+const { getAllReviews } = require('./getReviews');
 const client = require('./client.cjs');
+
 const app = express();
 
 app.use(express.json()); // Middleware to parse JSON request bodies
@@ -40,6 +42,17 @@ app.post('/api/v1/seller', async (req, res, next) => {
         res.status(500).json({ error: 'Failed to create seller' });
     }
 });
+app.get('/api/v1/reviews', async (req, res, next) => {
+    try {
+        const reviews = await getAllReviews();
+        res.json(reviews);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to fetch reviews' });
+    }
+});
+
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
