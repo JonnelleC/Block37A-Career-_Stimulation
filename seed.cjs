@@ -45,23 +45,21 @@ const sellerTable = async () => {
 sellerTable();
 
 
-
 const syncAndSeed = async () => {
-    try{
+    try {
         await client.connect();
-        console.log('CONNECTED')
+        console.log('CONNECTED');
 
         await createTables();
+        await createSellerTable();
         await seedData();
-        
+
         await client.end();
         console.log('DISCONNECTED');
-
-        await createSeller();
-        console.log('Registration Completed!')
-
-        await createBag();
-        console.log('New Bag On the Block!')
+    } catch (err) {
+        console.error('Error during sync and seed:', err);
+        await client.end();
     }
-}
-syncAndSeed ();
+};
+
+syncAndSeed();
