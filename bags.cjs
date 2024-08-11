@@ -27,6 +27,7 @@ const getAllBags = async () => {
 }   
 
 
+
 module.exports = {
     createBag,
     getAllBags

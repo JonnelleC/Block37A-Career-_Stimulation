@@ -73,6 +73,7 @@ const seedData = async () => {
   await createBag('Chanel19', 'chanel', 2018, 'worked', 5000);
   await getAllBags();
   await createReviewTable();
+  await getAllReviews();
   await syncAndSeed();
   await client.end();
 };
